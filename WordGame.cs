@@ -119,7 +119,7 @@ namespace Word_Game
             string tempWord = "";
             string reverseWord;
 
-            if (word.Length <= cols)    // left->right(+inverted)
+            if (word.Length <= cols)    // searching left->right(+inverted)
             {
                 for (int row = 0; row < rows; row++)
                 {
@@ -147,7 +147,7 @@ namespace Word_Game
                 }
             }
 
-            if (word.Length <= rows)    // up->down(+inverted)
+            if (word.Length <= rows)    // searching up->down(+inverted)
             {
                 for (int col = 0; col < cols; col++)
                 {
@@ -175,9 +175,9 @@ namespace Word_Game
                 }
             }
 
-            if (word.Length <= cols && word.Length <= rows) // top_left->down_right(+inverted), down_left->up_right(+inverted)
+            if (word.Length <= cols && word.Length <= rows) // searching top_left->down_right(+inverted) and down_left->up_right(+inverted)
             {
-                // top_left->down_right(+inverted); diagonally
+                // searching top_left->down_right(+inverted); diagonally
                 for (int startingRow = 0; startingRow <= rows - word.Length; startingRow++)
                 {
                     for (int startingCol = 0; startingCol <= cols - word.Length; startingCol++)
@@ -203,7 +203,7 @@ namespace Word_Game
                     }
                 }
 
-                // down_left->up_right(+inverted); diagonally
+                // searching down_left->up_right(+inverted); diagonally
                 for (int startingRow = rows - 1; startingRow >= word.Length - 1; startingRow--)
                 {
                     for (int startingCol = 0; startingCol <= cols - word.Length; startingCol++)
