@@ -5,31 +5,15 @@ namespace Word_Game
 {
     class WordGame
     {
-        public static string Reverse(string word)
+        static string Reverse(string word)
         {
             char[] charArray = word.ToArray();
             Array.Reverse(charArray);
             return new string(charArray);
         }
 
-        static void Main()
+        static void DrawTable(int rows, int cols)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-
-            // table characteristics
-            Console.Write("Rows: ");
-            int rows = int.Parse(Console.ReadLine());
-            Console.Write("Cols: ");
-            int cols = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Now fill out the table with letters:\n");
-
-
-            // declaring and initialzing a string array; this will hold the table's content
-            string[,] table = new string[rows, cols];
-
-            // drawing the table
-
             string horizontalLine = new string('-', cols * 2 + 1);
 
             for (int i = 0; i <= rows * 2; i++)
@@ -47,6 +31,48 @@ namespace Word_Game
                     Console.WriteLine();
                 }
             }
+        }
+
+        static void PrintResult(string word, int counter)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Result: The word ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(word);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(" was seen ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            if (counter <= 1)
+            {
+                Console.Write("{0} time", counter);
+            }
+            else
+            {
+                Console.Write("{0} times", counter);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        static void Main()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            // table characteristics
+            Console.Write("Rows: ");
+            int rows = int.Parse(Console.ReadLine());
+            Console.Write("Cols: ");
+            int cols = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Now fill out the table with letters:\n");
+
+            // declaring and initialzing a string array; this will hold the table's content
+            string[,] table = new string[rows, cols];
+
+            DrawTable(rows, cols);
 
             /* - filling out the string array with values
                - we're also going to need two variables to use
@@ -78,14 +104,14 @@ namespace Word_Game
                 current_row += 2;
             }
 
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine('\n');
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
             // Now the user will input a word to search for
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter a word you want to search for: ");
             Console.ForegroundColor = ConsoleColor.Cyan;
             string word = Console.ReadLine();
+
             int counter = 0;    // here we'll count the occurrences
 
             // now we have to check the string array for the word
@@ -204,31 +230,10 @@ namespace Word_Game
                 }
 
             }
-
             Console.WriteLine();
 
             // result
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("Result: The word ");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write(word);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(" was seen ");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            if (counter <= 1)
-            {
-                Console.Write("{0} time", counter);
-            }
-            else
-            {
-                Console.Write("{0} times", counter);
-            }
-
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.ForegroundColor = ConsoleColor.Gray;
-
+            PrintResult(word, counter);
         }
     }
 }
